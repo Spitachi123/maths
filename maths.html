@@ -109,8 +109,6 @@ window._fbSaveMembers = async () => { if (!window._FB_DB) return false; await se
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--fb);overflow-x:hidden;cursor:none}
-
-/* Mathematical grid lines — like graph paper */
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
     linear-gradient(rgba(212,168,67,.03) 1px,transparent 1px),
@@ -119,17 +117,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     linear-gradient(90deg,rgba(212,168,67,.015) 1px,transparent 1px);
   background-size:80px 80px,80px 80px,20px 20px,20px 20px}
 
-/* FIREBASE BANNER */
 .fb-banner{position:fixed;top:0;left:0;right:0;z-index:99999;background:linear-gradient(90deg,#5a2800,#7a3800);color:var(--cream);font-family:var(--fm);font-size:10px;letter-spacing:1px;padding:9px 20px;display:flex;align-items:center;gap:12px;line-height:1.4}
 .fb-banner a{color:var(--gold);font-weight:700;text-decoration:underline;cursor:pointer}
 .fb-banner button{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:var(--cream);font-family:var(--fm);font-size:9px;padding:3px 10px;cursor:pointer;letter-spacing:1px}
 .fb-banner.fb-ok{background:linear-gradient(90deg,#1a3a1a,#2a5a2a)}
 .fb-banner.fb-hidden{display:none}
 
-/* FIREBASE MODAL */
 #fb-modal .fb-inner{background:var(--bg2);border:1px solid var(--border2);padding:32px;max-width:560px;width:90%;max-height:90vh;overflow-y:auto}
 
-/* CONTENT IMAGES */
 .slide-content-imgs{position:absolute;inset:0;pointer-events:none}
 .ci-wrap{position:absolute;pointer-events:all;cursor:move;user-select:none;min-width:40px;min-height:30px}
 .ci-wrap img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
@@ -150,7 +145,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .ci-tb-sep{width:1px;height:18px;background:var(--border);margin:0 2px}
 .ci-caption{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-family:var(--fm);font-size:9px;color:var(--muted);pointer-events:none;letter-spacing:1px}
 
-/* CIMG PANEL */
 .cimg-panel-empty{font-family:var(--fm);font-size:8px;color:var(--muted);padding:12px;text-align:center;border:1px dashed var(--border2);line-height:1.7}
 .cimg-list-item{background:var(--panel);border:1px solid var(--border);padding:8px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .2s}
 .cimg-list-item:hover,.cimg-list-item.on{border-color:var(--gold);background:rgba(212,168,67,.04)}
@@ -168,17 +162,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .cimg-wh-row input:focus{border-color:var(--gold)}
 .cimg-wh-lbl{font-family:var(--fm);font-size:8px;color:var(--muted)}
 
-/* CUSTOM CURSOR */
 .cur{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;box-shadow:0 0 16px var(--gold),0 0 30px rgba(212,168,67,.4);transition:transform .1s}
 .cur-ring{width:32px;height:32px;border:1px solid rgba(212,168,67,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:all .2s ease}
 .cur.click{transform:scale(2)}
 
-/* FLOATING MATH PARTICLES */
 .ptc{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
 .pt{position:absolute;opacity:0;animation:ptfloat var(--d) var(--dl) infinite linear;font-family:var(--fh);color:rgba(212,168,67,.15);font-size:var(--fs);user-select:none}
 @keyframes ptfloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:.08}100%{transform:translateY(-60px) rotate(360deg);opacity:0}}
 
-/* ANIMATIONS */
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(212,168,67,.3)}50%{box-shadow:0 0 50px rgba(212,168,67,.7),0 0 80px rgba(212,168,67,.3)}}
@@ -187,7 +178,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes draw{from{stroke-dashoffset:500}to{stroke-dashoffset:0}}
 
-/* SIDEBAR */
 .sidebar{position:fixed;left:0;top:0;height:100vh;width:var(--sidebar);background:linear-gradient(180deg,#100c04 0%,#080602 100%);border-right:1px solid var(--border2);display:flex;flex-direction:column;z-index:500;overflow:hidden}
 .sidebar::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(212,168,67,0.04)'/%3E%3C/svg%3E") repeat;pointer-events:none}
 .sidebar::after{content:'';position:absolute;right:-1px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--gold),transparent);opacity:.4}
@@ -207,7 +197,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .sb-foot{padding:10px 18px;border-top:1px solid var(--border);font-family:var(--fm);font-size:8px;color:var(--muted);letter-spacing:1px}
 .status-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite;display:inline-block;margin-right:5px}
 
-/* MAIN */
 .main{margin-left:var(--sidebar);min-height:100vh;position:relative;z-index:2}
 .topbar{height:48px;background:rgba(13,10,5,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);display:flex;align-items:center;padding:0 30px;position:sticky;top:0;z-index:400}
 .tb-bread{font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:2px}
@@ -218,16 +207,13 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .tb-present-btn::before{content:'';position:absolute;top:-50%;left:-75%;width:50%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:shine 3s infinite}
 .tb-present-btn:hover{transform:scale(1.05)}
 
-/* PAGES */
 .page{display:none;animation:fadeUp .3s ease}
 .page.active{display:block}
 
-/* HOME HERO */
 .hero{height:calc(100vh - 48px);display:flex;flex-direction:column;justify-content:center;padding:60px 56px 40px;position:relative;overflow:hidden}
 .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
 .hero-orb1{width:700px;height:700px;right:-200px;top:-200px;background:radial-gradient(circle,rgba(212,168,67,.08) 0%,transparent 70%)}
 .hero-orb2{width:400px;height:400px;left:-150px;bottom:-100px;background:radial-gradient(circle,rgba(168,212,160,.05) 0%,transparent 70%)}
-/* Decorative SVG math symbol behind title */
 .hero-mathbg{position:absolute;right:80px;top:50%;transform:translateY(-50%);opacity:.04;font-family:var(--fh);font-size:320px;color:var(--gold);user-select:none;line-height:1;pointer-events:none;font-style:italic}
 .hero-kicker{font-family:var(--fm);font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:22px;animation:slideInLeft .6s ease both}
 .hero-kicker::before{content:'';width:30px;height:1px;background:var(--gold)}
@@ -252,14 +238,12 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .topic-card p{font-family:var(--fb);font-size:12px;color:var(--muted);line-height:1.7;font-style:italic}
 .topic-mod{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:8px;letter-spacing:3px;color:var(--gold)}
 
-/* SECTION HEADERS */
 .section{padding:48px}
 .sec-header{display:flex;align-items:baseline;gap:14px;margin-bottom:28px}
 .sec-header h2{font-family:var(--fh);font-size:30px;letter-spacing:2px;color:var(--white);font-style:italic}
 .sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
 .sec-count{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:var(--muted)}
 
-/* MEMBERS */
 .members-grid{display:flex;flex-wrap:wrap;gap:32px;padding:60px 48px;justify-content:center;align-items:flex-start}
 .member-card{background:transparent;padding:0;cursor:none;transition:all .3s;text-align:center;width:130px;border:none}
 .member-card:hover .m-avatar{border-color:var(--gold);box-shadow:0 0 24px rgba(212,168,67,.35);transform:scale(1.08)}
@@ -287,7 +271,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .skill-tag{font-family:var(--fm);font-size:8px;letter-spacing:2px;padding:5px 10px;border:1px solid var(--border2);color:var(--muted);text-transform:uppercase;transition:all .2s;cursor:none}
 .skill-tag:hover{border-color:var(--gold);color:var(--gold)}
 
-/* SLIDES PAGE */
 .slides-page{padding:36px 44px}
 .slides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:28px}
 .slide-thumb{background:var(--panel);border:1px solid var(--border);padding:24px 20px;cursor:none;transition:all .3s;position:relative;overflow:hidden;min-height:160px;display:flex;flex-direction:column;justify-content:flex-end}
@@ -302,7 +285,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .slides-cta h3{font-family:var(--fh);font-size:18px;font-weight:700;color:var(--white);font-style:italic}
 .slides-cta p{font-family:var(--fb);font-size:12px;color:var(--muted);margin-top:3px;font-style:italic}
 
-/* ============================================================ DEVELOPER ============================================================ */
 .dev-layout{display:grid;grid-template-columns:220px 1fr 340px;height:calc(100vh - 96px);overflow:hidden;width:100%}
 .dev-left{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .dev-left-header{padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
@@ -325,7 +307,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .dev-add{margin:8px;padding:10px;border:1px dashed var(--border2);background:transparent;color:var(--muted);font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .2s;text-align:center;flex-shrink:0}
 .dev-add:hover{border-color:var(--gold);color:var(--gold)}
 
-/* VTBL */
 .vtbl-wrap{background:var(--bg);border:1px solid var(--border2);padding:10px;margin-top:4px}
 .vtbl-header-row{display:grid;gap:4px;margin-bottom:6px}
 .vtbl-row{display:grid;gap:4px;margin-bottom:4px;position:relative;align-items:center}
@@ -338,7 +319,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .vtbl-add-row{width:100%;padding:6px;border:1px dashed var(--border2);background:transparent;color:var(--muted);font-family:var(--fm);font-size:8px;letter-spacing:1px;cursor:pointer;transition:all .2s;margin-top:4px}
 .vtbl-add-row:hover{border-color:var(--gold);color:var(--gold)}
 
-/* BIG CANVAS */
 .dev-canvas{background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 .dev-canvas-header{padding:12px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--bg2)}
 .dev-canvas-header .ch-label{font-family:var(--fm);font-size:8px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
@@ -347,7 +327,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .dev-card{width:100%;aspect-ratio:16/9;max-height:calc(100vh - 220px);max-width:calc((100vh - 220px) * 16/9);background:var(--panel);border:1px solid var(--border);position:relative;padding:52px 64px 46px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;transition:all .3s;box-shadow:0 0 60px rgba(0,0,0,.6)}
 .dev-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2),transparent)}
 .dev-card-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
-/* Decorative math symbol watermark on dev card */
 .dev-card-watermark{position:absolute;bottom:20px;right:30px;font-family:var(--fh);font-size:80px;color:rgba(212,168,67,.04);pointer-events:none;font-style:italic;user-select:none}
 .dev-card-num{position:absolute;top:16px;right:20px;font-family:var(--fm);font-size:9px;letter-spacing:2px;color:var(--muted)}
 .dev-card-lbl{font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;opacity:.7}
@@ -356,7 +335,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .dev-card-body{font-family:var(--fb);line-height:1.8;outline:none;border:none;background:transparent;width:100%;resize:none;min-height:60px;transition:font-size .2s,color .2s;font-style:italic}
 .dev-card-body:focus{outline:1px dashed rgba(212,168,67,.2);outline-offset:4px}
 
-/* TEXT BOX STYLES */
 .tb-wrap{position:absolute;pointer-events:all;cursor:move;user-select:none;min-width:80px;min-height:30px}
 .tb-wrap.tb-selected{outline:2px solid var(--gold);outline-offset:1px}
 .tb-inner{width:100%;height:100%;font-family:var(--fb);font-size:14px;color:var(--white);background:transparent;border:none;outline:none;resize:none;padding:4px 8px;word-wrap:break-word;overflow:hidden;cursor:text}
@@ -372,7 +350,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .tb-tb-btn.del:hover{border-color:var(--red);color:var(--red)}
 .tb-tb-sep{width:1px;height:18px;background:var(--border);margin:0 2px}
 
-/* RIGHT PROPERTIES PANEL */
 .dev-right{background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .dev-right-header{padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .dev-right-header h3{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
@@ -430,7 +407,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .info-note p{font-family:var(--fm);font-size:8px;color:var(--muted);line-height:1.7}
 .info-note span{color:var(--gold)}
 
-/* COLLAPSIBLE RIGHT PANEL */
 .rp-box{padding-bottom:0!important;border-bottom:1px solid var(--border)!important;margin-bottom:0!important}
 .rp-box-header{display:flex;align-items:center;padding:10px 0 8px;cursor:pointer;user-select:none}
 .rp-box-header .prop-section-title{margin-bottom:0!important;flex:1}
@@ -445,7 +421,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .rp-code-hint{background:rgba(0,0,0,.3);border:1px solid var(--border);padding:8px 10px;font-family:var(--fm);font-size:8px;color:var(--muted);line-height:2;margin-top:6px}
 .rp-code-hint .rch{color:var(--white);margin-bottom:3px;display:block}
 
-/* TEMPLATE GRID */
 .template-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
 .template-btn{padding:10px 8px;border:1px solid var(--border);background:var(--panel);color:var(--muted);font-family:var(--fm);font-size:7px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-align:center;transition:all .2s}
 .template-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,.04)}
@@ -453,10 +428,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .dev-item-layout{font-family:var(--fm);font-size:7px;color:var(--muted);margin-top:2px;letter-spacing:1px;text-transform:uppercase}
 .layout-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--fm);font-size:7px;letter-spacing:2px;color:var(--gold);background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);padding:3px 7px;margin-left:8px}
 
-/* ============================================================ PRESENT MODE ============================================================ */
 #present-mode{position:fixed;inset:0;background:var(--bg);z-index:10000;display:none;flex-direction:column}
 #present-mode.on{display:flex}
-/* Decorative spinning geometric overlay */
 #present-mode::after{content:'∞';position:absolute;right:-60px;bottom:-60px;font-family:var(--fh);font-size:400px;color:rgba(212,168,67,.02);pointer-events:none;z-index:0;font-style:italic;line-height:1}
 .pm-bar{position:absolute;bottom:0;left:0;right:0;z-index:20;height:52px;background:rgba(13,10,5,.92);backdrop-filter:blur(20px);border-top:1px solid var(--border2);display:flex;align-items:center;padding:0 28px;gap:14px;transform:translateY(100%);transition:transform .3s ease}
 #present-mode:hover .pm-bar,#present-mode.pm-show-bar .pm-bar{transform:translateY(0)}
@@ -468,7 +441,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-ctrl.exit:hover{background:var(--red);color:var(--bg)}
 .pm-stage{flex:1;width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .pm-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.015) 1px,transparent 1px),linear-gradient(rgba(212,168,67,.008) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.008) 1px,transparent 1px);background-size:80px 80px,80px 80px,20px 20px,20px 20px;pointer-events:none}
-/* Rotating geometric decoration */
 .pm-geo-deco{position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:500px;height:500px;opacity:.03;pointer-events:none;z-index:0;animation:spin 60s linear infinite}
 .pm-counter-float{position:absolute;top:20px;right:28px;z-index:15;font-family:var(--fm);font-size:11px;letter-spacing:3px;color:rgba(212,168,67,.5);background:rgba(13,10,5,.7);padding:5px 12px;border:1px solid rgba(212,168,67,.12);backdrop-filter:blur(8px)}
 .pm-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:15;width:48px;height:80px;background:rgba(0,0,0,.3);border:1px solid var(--border2);color:rgba(212,168,67,.4);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:none;transition:all .25s;backdrop-filter:blur(8px)}
@@ -479,7 +451,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-dot.on{background:var(--gold);box-shadow:0 0 10px var(--gold);width:22px;border-radius:4px}
 .pm-esc-hint{position:absolute;top:16px;left:20px;z-index:15;font-family:var(--fm);font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.2);background:rgba(0,0,0,.4);padding:4px 10px;border:1px solid rgba(255,255,255,.08)}
 
-/* IMAGE SLIDESHOW */
 .pm-img-backdrop{position:absolute;inset:0;z-index:0;overflow:hidden}
 .pm-img-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease,transform 7s ease;transform:scale(1.06)}
 .pm-img-slide.active{opacity:.2;transform:scale(1)}
@@ -499,7 +470,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-img-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);cursor:none;transition:all .3s}
 .pm-img-dot.on{background:var(--gold);box-shadow:0 0 8px var(--gold)}
 
-/* ── COMPARISON TABLE ── */
 .pm-comparison{width:100%;border-collapse:collapse;margin-top:18px;font-family:var(--fb)}
 .pm-comparison th{background:rgba(212,168,67,.12);color:var(--gold);font-family:var(--fh);font-size:14px;padding:12px 16px;border:1px solid rgba(212,168,67,.2);text-align:left;font-weight:700;font-style:italic}
 .pm-comparison td{padding:10px 16px;border:1px solid var(--border);color:var(--text);font-size:13px;line-height:1.5;vertical-align:top;font-style:italic}
@@ -507,7 +477,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-comparison tr:hover td{background:rgba(212,168,67,.05)}
 .pm-comparison .check{color:var(--green)}.pm-comparison .cross{color:var(--red)}.pm-comparison .partial{color:var(--gold)}
 
-/* ── BULLETS ── */
 .pm-bullets{margin-top:16px;display:flex;flex-direction:column;gap:10px;max-width:900px}
 .pm-bullet-item{display:flex;align-items:flex-start;gap:14px;background:rgba(212,168,67,.03);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;transition:all .2s;animation:fadeUp .4s ease both}
 .pm-bullet-item:nth-child(n){animation-delay:calc(var(--i,.05s)*1)}
@@ -515,7 +484,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-bullet-text{font-family:var(--fb);font-size:15px;color:var(--text);line-height:1.6;font-style:italic}
 .pm-bullet-text strong{color:var(--white);display:block;margin-bottom:2px;font-size:16px;font-style:italic}
 
-/* ── STATS ── */
 .pm-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;max-width:900px}
 .pm-stat-card{background:var(--panel);border:1px solid var(--border2);padding:24px 20px;position:relative;overflow:hidden;animation:fadeUp .4s ease both}
 .pm-stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent)}
@@ -524,7 +492,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-stat-label{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
 .pm-stat-sub{font-family:var(--fb);font-size:11px;color:var(--text);margin-top:5px;line-height:1.5;font-style:italic}
 
-/* ── TIMELINE ── */
 .pm-timeline{margin-top:20px;max-width:900px;position:relative;padding-left:32px}
 .pm-timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),rgba(212,168,67,.1))}
 .pm-tl-item{position:relative;padding:0 0 22px 28px;animation:fadeUp .4s ease both}
@@ -533,7 +500,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-tl-title{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px;font-style:italic}
 .pm-tl-desc{font-family:var(--fb);font-size:12px;color:var(--muted);line-height:1.6;font-style:italic}
 
-/* ── INTRO SLIDE ── */
 .pm-intro-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:60vh;width:100%;position:relative}
 .pm-intro-kicker{font-family:var(--fm);font-size:11px;letter-spacing:8px;color:var(--gold);text-transform:uppercase;margin-bottom:24px;opacity:.9}
 .pm-intro-title{font-family:var(--fh);letter-spacing:3px;line-height:.92;margin-bottom:32px;text-align:center;font-style:italic}
@@ -546,7 +512,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-intro-bg-accent{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .pm-intro-bg-accent::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(212,168,67,.06) 0%,transparent 70%);border-radius:50%}
 
-/* ── CONTENT SLIDE ── */
 .pm-content-slide{width:100%;display:flex;flex-direction:column;gap:0}
 .pm-content-header{border-bottom:1px solid rgba(212,168,67,.2);padding-bottom:18px;margin-bottom:24px;display:flex;align-items:flex-end;gap:16px}
 .pm-content-header h1{font-family:var(--fh);letter-spacing:3px;line-height:1;flex:1;font-style:italic}
@@ -565,7 +530,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-content-points li{font-family:var(--fb);font-size:14px;color:var(--text);padding-left:22px;position:relative;line-height:1.6;font-style:italic}
 .pm-content-points li::before{content:'∴';position:absolute;left:0;color:var(--gold);font-size:12px}
 
-/* ── DIFFERENCE TABLE ── */
 .pm-diff-wrap{width:100%;margin-top:16px;max-width:100%}
 .pm-diff-hcell{padding:12px 18px;font-family:var(--fh);font-size:14px;letter-spacing:1px;text-align:center;border:1px solid rgba(212,168,67,.2);font-style:italic}
 .pm-diff-hcell:first-child{background:rgba(0,0,0,.3);color:var(--muted);border-color:var(--border);font-family:var(--fm);font-size:9px}
@@ -579,21 +543,18 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pm-diff-cell.ca{border-left:3px solid rgba(212,168,67,.5)}
 .pm-diff-cell.cb{border-left:3px solid rgba(168,212,160,.5)}
 
-/* HOME EDITOR */
 .quick-stat{display:flex;justify-content:space-between;align-items:center;font-family:var(--fm);font-size:9px;padding:8px 12px;background:var(--panel);border:1px solid var(--border);margin-bottom:6px}
 .quick-stat .qs-label{color:var(--muted)}.quick-stat .qs-val{color:var(--gold)}
 </style>
 </head>
 <body>
 
-<!-- FIREBASE BANNER -->
 <div class="fb-banner" id="fb-banner">
   ⚠️ Firebase not connected — changes only visible on <strong>this device</strong>.
   <a onclick="showFbSetup()">Click to set up real-time sync →</a>
   <button onclick="document.getElementById('fb-banner').classList.add('fb-hidden')">DISMISS</button>
 </div>
 
-<!-- FIREBASE SETUP MODAL -->
 <div id="fb-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);align-items:center;justify-content:center">
   <div style="background:var(--bg2);border:1px solid var(--border2);padding:32px;max-width:560px;width:90%;max-height:90vh;overflow-y:auto">
     <div style="font-family:var(--fh);font-size:26px;color:var(--gold);letter-spacing:3px;margin-bottom:6px;font-style:italic">🔥 Firebase Setup</div>
@@ -611,7 +572,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 <div class="cur-ring" id="curRing"></div>
 <div class="ptc" id="ptc"></div>
 
-<!-- SIDEBAR -->
 <nav class="sidebar">
   <div class="sb-logo">
     <div class="sb-tag">// Mathematics</div>
@@ -628,7 +588,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <div class="sb-foot"><span class="status-dot"></span>THEOREM READY</div>
 </nav>
 
-<!-- MAIN -->
 <div class="main">
   <div class="topbar">
     <div class="tb-bread">MathΩ / <span id="breadcrumb">HOME</span></div>
@@ -638,7 +597,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
 
-  <!-- HOME -->
   <div class="page active" id="page-home">
     <div class="hero">
       <div class="hero-orb hero-orb1"></div>
@@ -658,7 +616,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
 
-  <!-- MEMBERS -->
   <div class="page" id="page-members">
     <div class="members-grid" id="members-grid"></div>
     <div class="member-panel" id="member-panel">
@@ -667,7 +624,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
 
-  <!-- SLIDES -->
   <div class="page" id="page-slides">
     <div class="slides-page">
       <div class="sec-header" style="margin-bottom:24px"><h2>Slide Deck</h2><div class="sec-line"></div><div class="sec-count" id="slides-count">9 SLIDES</div></div>
@@ -679,14 +635,12 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
 
-  <!-- DEVELOPER -->
   <div class="page" id="page-developer">
     <div style="display:flex;align-items:center;gap:0;border-bottom:1px solid var(--border2);background:var(--bg2);flex-shrink:0">
       <button id="dev-tab-slides" onclick="switchDevTab('slides')" style="padding:12px 24px;border:none;border-bottom:2px solid var(--gold);background:transparent;color:var(--gold);font-family:var(--fm);font-size:9px;letter-spacing:2px;cursor:none;transition:all .2s">SLIDES</button>
       <button id="dev-tab-home" onclick="switchDevTab('home')" style="padding:12px 24px;border:none;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font-family:var(--fm);font-size:9px;letter-spacing:2px;cursor:none;transition:all .2s">HOME PAGE</button>
     </div>
 
-    <!-- SLIDES TAB -->
     <div id="dev-tab-content-slides" style="display:flex;height:calc(100vh - 96px)">
     <div class="dev-layout" style="display:contents">
       <div class="dev-left">
@@ -728,7 +682,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
     </div>
 
-    <!-- HOME TAB -->
     <div id="dev-tab-content-home" style="display:none;height:calc(100vh - 96px);overflow-y:auto;padding:32px 48px">
       <div style="max-width:860px">
         <div class="sec-header" style="margin-bottom:28px"><h2>Home Page Editor</h2><div class="sec-line"></div></div>
@@ -791,7 +744,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           <div class="sync-msg" id="home-sync-msg"></div>
         </div>
 
-        <!-- API KEY MANAGER -->
         <div class="prop-section" style="margin-top:32px">
           <div class="prop-section-title">🔑 API Key Manager</div>
           <div class="prop-group">
@@ -823,11 +775,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   </div>
 </div>
 
-<!-- PRESENT MODE -->
 <div id="present-mode">
   <div class="pm-stage">
     <div class="pm-grid-bg"></div>
-    <!-- Spinning golden polygon -->
     <svg class="pm-geo-deco" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <polygon points="200,20 380,110 380,290 200,380 20,290 20,110" stroke="#d4a843" stroke-width="1" fill="none"/>
       <circle cx="200" cy="200" r="160" stroke="#d4a843" stroke-width="0.5" fill="none"/>
@@ -888,10 +838,8 @@ document.addEventListener('mousedown',()=>curEl.classList.add('click'));
 document.addEventListener('mouseup',()=>curEl.classList.remove('click'));
 (function ani(){ curEl.style.transform=`translate(${mx-4}px,${my-4}px)`; rx+=(mx-rx)*.11; ry+=(my-ry)*.11; ringEl.style.transform=`translate(${rx-16}px,${ry-16}px)`; requestAnimationFrame(ani); })();
 
-// CLOCK
 setInterval(()=>{ const n=new Date(); document.getElementById('clock').textContent=[n.getHours(),n.getMinutes(),n.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':'); },1000);
 
-// FLOATING MATH PARTICLES
 const MATH_SYMBOLS=['∫','∑','∏','∂','∇','√','∞','π','φ','θ','λ','μ','σ','Ω','Δ','α','β','γ','≈','≡','±','∈','∉','⊂','⊃','∩','∪','∀','∃','∄','∧','∨','⟹','⟺','ℕ','ℤ','ℚ','ℝ','ℂ'];
 const ptc=document.getElementById('ptc');
 for(let i=0;i<32;i++){
@@ -1053,7 +1001,7 @@ function buildSlideHTML(s){
 
   if(s.layout==='stats'){
     const statItems=(s.body||'').split('||').filter(Boolean);
-    const statsHtml=statItems.map((item,i)=>{ const parts=item.split('|'); const num=parts[0]||'??'; const label=parts[1]||''; const sub=parts[2]||''; const m=num.match(/^([^a-zA-Z]*)([a-zA-Z].*)$/)||[num,num,'']; return `<div class="pm-stat-card" style="animation-delay:${i*0.08}s"><div class="pm-stat-num">${num}</div><div class="pm-stat-label">${label}</div>${sub?`<div class="pm-stat-sub">${sub}</div>`:''}</div>`; }).join('');
+    const statsHtml=statItems.map((item,i)=>{ const parts=item.split('|'); const num=parts[0]||'??'; const label=parts[1]||''; const sub=parts[2]||''; return `<div class="pm-stat-card" style="animation-delay:${i*0.08}s"><div class="pm-stat-num">${num}</div><div class="pm-stat-label">${label}</div>${sub?`<div class="pm-stat-sub">${sub}</div>`:''}</div>`; }).join('');
     return `<div style="position:relative">${lbl}<h1 style="${titleStyle};margin-bottom:4px">${s.title}</h1><div class="pm-stats-grid">${statsHtml}</div>${cimgHtml}${tbHtml}</div>`;
   }
 
@@ -1063,7 +1011,7 @@ function buildSlideHTML(s){
     return `<div style="position:relative">${lbl}<h1 style="${titleStyle};margin-bottom:12px">${s.title}</h1><div class="pm-timeline">${tlHtml}</div>${cimgHtml}${tbHtml}</div>`;
   }
 
-  // simple
+  // simple / two-col / default
   return `<div style="position:relative">${lbl}<h1 style="${titleStyle}">${s.title}</h1><p style="${bodyStyle}">${s.body}</p>${cimgHtml}${tbHtml}</div>`;
 }
 
@@ -1093,6 +1041,11 @@ document.addEventListener('keydown',e=>{
 // ============================================================ DEVELOPER ============================================================
 var devSlIdx=0; window._devSlIdx=0;
 const COLOR_PRESETS=['#f5e6c8','#d4a843','#a8d4a0','#c8a8d4','#d4c8a8','#ffffff','#c8b89a','#8aacb8','#b8a88a','#7aab72'];
+
+// Layouts that use structured vtbl editors (NOT the simple textarea #pi-bdy)
+const STRUCTURED_LAYOUTS=['bullets','comparison','difference','stats','timeline','content','intro'];
+
+function isStructuredLayout(layout){ return STRUCTURED_LAYOUTS.includes(layout); }
 
 function initDev(){ devRenderList(); devPickSlide(devSlIdx); }
 
@@ -1143,12 +1096,43 @@ function devPickSlide(i){
 function stripHtml(h){ const d=document.createElement('div');d.innerHTML=h;return d.textContent||d.innerText||''; }
 
 // ── BODY EDITOR ──
+// Returns the editor HTML for the current slide's layout.
+// For structured layouts, vtbl helpers keep APP.slides[devSlIdx].body in sync directly.
+// For simple/two-col, the #pi-bdy textarea is the source of truth.
 function buildBodyEditorHTML(s){
   const layout=s.layout||'simple';
   const body=s.body||'';
-  if(['simple','two-col','intro'].includes(layout)){
+
+  if(layout==='simple'||layout==='two-col'){
     return `<div class="prop-label">Content</div><textarea class="prop-textarea" id="pi-bdy" style="min-height:88px" oninput="liveBody()">${eh(stripHtml(body))}</textarea>`;
   }
+
+  if(layout==='intro'){
+    const items=body.split('||').filter(Boolean);
+    // items[0] = subtitle, items[1+] = meta items
+    const parsed=items.map((it,i)=>({ val: it.trim() }));
+    return `<div class="prop-label" style="margin-bottom:6px">Intro Sections <span style="color:var(--muted);font-size:7px">(first = subtitle, rest = meta tags)</span></div>
+    <div class="vtbl-wrap"><div id="vtbl-rows">
+      ${parsed.map((item,ri)=>`<div class="vtbl-row" style="display:grid;grid-template-columns:1fr 22px;gap:4px" data-ri="${ri}">
+        <input class="vtbl-cell${ri===0?' vtbl-label':''}" placeholder="${ri===0?'Subtitle text':'Meta item (e.g. Year or Author)'}" value="${eh(item.val)}" oninput="vtblIntroEdit(${ri},this.value)">
+        <button class="vtbl-del-row" onclick="vtblIntroDel(${ri})">✕</button>
+      </div>`).join('')}
+    </div><button class="vtbl-add-row" onclick="vtblIntroAdd()">+ Add Meta Item</button></div>`;
+  }
+
+  if(layout==='content'){
+    const items=body.split('||').filter(Boolean);
+    const parsed=items.map(it=>{ const sep=it.indexOf('::'); return {t: sep>=0?it.slice(0,sep).trim():it.trim(), b: sep>=0?it.slice(sep+2).trim():''}; });
+    return `<div class="prop-label" style="margin-bottom:6px">Content Cards <span style="color:var(--muted);font-size:7px">(max 4)</span></div>
+    <div class="vtbl-wrap"><div id="vtbl-rows">
+      ${parsed.map((item,ri)=>`<div class="vtbl-row" style="display:grid;grid-template-columns:1fr 1fr 22px;gap:4px" data-ri="${ri}">
+        <input class="vtbl-cell vtbl-label" placeholder="Card Title" value="${eh(item.t)}" oninput="vtblContentEdit(${ri},'t',this.value)">
+        <input class="vtbl-cell" placeholder="Card Body (use | for bullet points)" value="${eh(item.b)}" oninput="vtblContentEdit(${ri},'b',this.value)">
+        <button class="vtbl-del-row" onclick="vtblContentDel(${ri})">✕</button>
+      </div>`).join('')}
+    </div><button class="vtbl-add-row" onclick="vtblContentAdd()">+ Add Card</button></div>`;
+  }
+
   if(layout==='comparison'||layout==='difference'){
     const rows=body.split('\n').filter(Boolean);
     const hdrs=rows[0]?rows[0].split('|').map(x=>x.trim()):(layout==='difference'?['Aspect','Option A','Option B']:['Feature','Option A','Option B']);
@@ -1170,6 +1154,7 @@ function buildBodyEditorHTML(s){
       <button class="vtbl-add-row" onclick="vtblAddRow()">+ Add Row</button>
     </div>`;
   }
+
   if(layout==='bullets'){
     const items=body.split('||').filter(Boolean);
     const parsed=items.map(it=>{ const p=it.split('::'); return {t:p[0]||'',s:p[1]||''}; });
@@ -1182,6 +1167,7 @@ function buildBodyEditorHTML(s){
       </div>`).join('')}
     </div><button class="vtbl-add-row" onclick="vtblBulletAdd()">+ Add Bullet</button></div>`;
   }
+
   if(layout==='stats'){
     const items=body.split('||').filter(Boolean);
     const parsed=items.map(it=>{ const p=it.split('|'); return {n:p[0]||'',l:p[1]||'',s:p[2]||''}; });
@@ -1199,6 +1185,7 @@ function buildBodyEditorHTML(s){
       <button class="vtbl-add-row" onclick="vtblStatAdd()">+ Add Stat</button>
     </div>`;
   }
+
   if(layout==='timeline'){
     const items=body.split('||').filter(Boolean);
     const parsed=items.map(it=>{ const p=it.split('|'); return {e:p[0]||'',t:p[1]||'',d:p[2]||''}; });
@@ -1216,30 +1203,174 @@ function buildBodyEditorHTML(s){
       <button class="vtbl-add-row" onclick="vtblTlAdd()">+ Add Event</button>
     </div>`;
   }
+
+  // fallback for unknown layouts
   return `<div class="prop-label">Content</div><textarea class="prop-textarea" id="pi-bdy" style="min-height:88px" oninput="liveBody()">${eh(stripHtml(body))}</textarea>`;
 }
 
-// vtbl helpers
-function _vtblGetTableRows(){ const rows=[]; document.querySelectorAll('#vtbl-rows .vtbl-row').forEach(row=>{ const vals=Array.from(row.querySelectorAll('.vtbl-cell')).map(el=>el.value||''); rows.push(vals.join('|')); }); return rows; }
-function _vtblGetHeaders(){ const h=[]; document.querySelectorAll('.vtbl-head').forEach(el=>h.push(el.value||el.textContent||'')); return h; }
-function vtblEditHeader(ci,val){ const hdrs=_vtblGetHeaders(); hdrs[ci]=val; APP.slides[devSlIdx].body=[hdrs.join('|'),..._vtblGetTableRows()].join('\n'); _bodyLiveRefresh(); }
-function vtblEditCell(ri,ci,val){ APP.slides[devSlIdx].body=[_vtblGetHeaders().join('|'),..._vtblGetTableRows()].join('\n'); _bodyLiveRefresh(); }
-function vtblAddRow(){ const s=APP.slides[devSlIdx]; const rows=(s.body||'').split('\n').filter(Boolean); const cols=rows[0]?rows[0].split('|').length:3; rows.push(Array(cols).fill('').join('|')); s.body=rows.join('\n'); refreshBodyEditor(); _bodyLiveRefresh(); }
-function vtblDelRow(ri){ const s=APP.slides[devSlIdx]; const rows=(s.body||'').split('\n').filter(Boolean); rows.splice(ri+1,1); s.body=rows.join('\n'); refreshBodyEditor(); _bodyLiveRefresh(); }
-function vtblBulletEdit(ri,key,val){ const s=APP.slides[devSlIdx]; const items=s.body.split('||').filter(Boolean); const parsed=items.map(it=>{ const p=it.split('::'); return {t:p[0]||'',s:p[1]||''}; }); if(!parsed[ri]) parsed[ri]={t:'',s:''}; parsed[ri][key]=val; s.body=parsed.map(p=>p.t+(p.s?'::'+p.s:'')).join('||'); _bodyLiveRefresh(); }
-function vtblBulletAdd(){ const s=APP.slides[devSlIdx]; s.body=(s.body?s.body+'||':'')+'New Point'; refreshBodyEditor(); _bodyLiveRefresh(); }
-function vtblBulletDel(ri){ const s=APP.slides[devSlIdx]; const items=s.body.split('||').filter(Boolean); items.splice(ri,1); s.body=items.join('||'); refreshBodyEditor(); _bodyLiveRefresh(); }
-function vtblStatEdit(ri,key,val){ const s=APP.slides[devSlIdx]; const items=s.body.split('||').filter(Boolean); const parsed=items.map(it=>{ const p=it.split('|'); return {n:p[0]||'',l:p[1]||'',s:p[2]||''}; }); if(!parsed[ri]) parsed[ri]={n:'',l:'',s:''}; parsed[ri][key]=val; s.body=parsed.map(p=>[p.n,p.l,p.s].join('|')).join('||'); _bodyLiveRefresh(); }
-function vtblStatAdd(){ const s=APP.slides[devSlIdx]; s.body=(s.body?s.body+'||':'')+'0|Label|Detail'; refreshBodyEditor(); _bodyLiveRefresh(); }
-function vtblStatDel(ri){ const s=APP.slides[devSlIdx]; const items=s.body.split('||').filter(Boolean); items.splice(ri,1); s.body=items.join('||'); refreshBodyEditor(); _bodyLiveRefresh(); }
-function vtblTlEdit(ri,key,val){ const s=APP.slides[devSlIdx]; const items=s.body.split('||').filter(Boolean); const parsed=items.map(it=>{ const p=it.split('|'); return {e:p[0]||'',t:p[1]||'',d:p[2]||''}; }); if(!parsed[ri]) parsed[ri]={e:'',t:'',d:''}; parsed[ri][key]=val; s.body=parsed.map(p=>[p.e,p.t,p.d].join('|')).join('||'); _bodyLiveRefresh(); }
-function vtblTlAdd(){ const s=APP.slides[devSlIdx]; s.body=(s.body?s.body+'||':'')+'Year|Event|Description'; refreshBodyEditor(); _bodyLiveRefresh(); }
-function vtblTlDel(ri){ const s=APP.slides[devSlIdx]; const items=s.body.split('||').filter(Boolean); items.splice(ri,1); s.body=items.join('||'); refreshBodyEditor(); _bodyLiveRefresh(); }
-function _bodyLiveRefresh(){ const bodyEl=document.getElementById('d-body'); if(bodyEl) bodyEl.textContent=stripHtml(APP.slides[devSlIdx].body||''); }
-function refreshBodyEditor(){ const wrap=document.getElementById('vtbl-editor-wrap'); if(wrap) wrap.innerHTML=buildBodyEditorHTML(APP.slides[devSlIdx]); }
+// ── VTBL HELPERS ──
+// All vtbl helpers immediately write to APP.slides[devSlIdx].body
+// and then sync the preview textarea. This guarantees the data model
+// is always up-to-date — no matter how many times Save is pressed.
 
-function onTitleInput(){ const s=APP.slides[devSlIdx]; if(!s) return; s.title=document.getElementById('d-title').textContent; }
-function onBodyInput(){ const s=APP.slides[devSlIdx]; if(!s) return; s.body=document.getElementById('d-body').textContent; }
+function _syncBodyPreview(){
+  const bodyEl=document.getElementById('d-body');
+  if(bodyEl) bodyEl.textContent=stripHtml(APP.slides[devSlIdx].body||'');
+}
+
+// intro helpers
+function vtblIntroEdit(ri,val){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  items[ri]=val;
+  s.body=items.join('||');
+  _syncBodyPreview();
+}
+function vtblIntroAdd(){
+  const s=APP.slides[devSlIdx];
+  s.body=(s.body?s.body+'||':'')+'New item';
+  refreshBodyEditor(); _syncBodyPreview();
+}
+function vtblIntroDel(ri){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  items.splice(ri,1);
+  s.body=items.join('||');
+  refreshBodyEditor(); _syncBodyPreview();
+}
+
+// content card helpers
+function vtblContentEdit(ri,key,val){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  const parsed=items.map(it=>{ const sep=it.indexOf('::'); return {t:sep>=0?it.slice(0,sep).trim():it.trim(),b:sep>=0?it.slice(sep+2).trim():''}; });
+  if(!parsed[ri]) parsed[ri]={t:'',b:''};
+  parsed[ri][key]=val;
+  s.body=parsed.map(p=>p.t+(p.b?'::'+p.b:'')).join('||');
+  _syncBodyPreview();
+}
+function vtblContentAdd(){
+  const s=APP.slides[devSlIdx];
+  s.body=(s.body?s.body+'||':'')+'New Card::Card content here';
+  refreshBodyEditor(); _syncBodyPreview();
+}
+function vtblContentDel(ri){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  items.splice(ri,1);
+  s.body=items.join('||');
+  refreshBodyEditor(); _syncBodyPreview();
+}
+
+// table helpers (comparison / difference)
+function _vtblRebuildTable(){
+  const rows=document.querySelectorAll('#vtbl-rows .vtbl-row');
+  const hdrs=Array.from(document.querySelectorAll('.vtbl-head')).map(el=>el.value||el.textContent||'');
+  const dataRows=Array.from(rows).map(row=>Array.from(row.querySelectorAll('.vtbl-cell:not(.vtbl-head)')).map(el=>el.value||'').join('|'));
+  APP.slides[devSlIdx].body=[hdrs.join('|'),...dataRows].join('\n');
+  _syncBodyPreview();
+}
+function vtblEditHeader(ci,val){ _vtblRebuildTable(); }
+function vtblEditCell(ri,ci,val){ _vtblRebuildTable(); }
+function vtblAddRow(){
+  const s=APP.slides[devSlIdx];
+  const rows=(s.body||'').split('\n').filter(Boolean);
+  const cols=rows[0]?rows[0].split('|').length:3;
+  rows.push(Array(cols).fill('').join('|'));
+  s.body=rows.join('\n');
+  refreshBodyEditor(); _syncBodyPreview();
+}
+function vtblDelRow(ri){
+  const s=APP.slides[devSlIdx];
+  const rows=(s.body||'').split('\n').filter(Boolean);
+  rows.splice(ri+1,1);
+  s.body=rows.join('\n');
+  refreshBodyEditor(); _syncBodyPreview();
+}
+
+// bullet helpers
+function vtblBulletEdit(ri,key,val){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  const parsed=items.map(it=>{ const p=it.split('::'); return {t:p[0]||'',s:p[1]||''}; });
+  if(!parsed[ri]) parsed[ri]={t:'',s:''};
+  parsed[ri][key]=val;
+  s.body=parsed.map(p=>p.t+(p.s?'::'+p.s:'')).join('||');
+  _syncBodyPreview();
+}
+function vtblBulletAdd(){
+  const s=APP.slides[devSlIdx];
+  s.body=(s.body?s.body+'||':'')+'New Point';
+  refreshBodyEditor(); _syncBodyPreview();
+}
+function vtblBulletDel(ri){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  items.splice(ri,1);
+  s.body=items.join('||');
+  refreshBodyEditor(); _syncBodyPreview();
+}
+
+// stat helpers
+function vtblStatEdit(ri,key,val){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  const parsed=items.map(it=>{ const p=it.split('|'); return {n:p[0]||'',l:p[1]||'',s:p[2]||''}; });
+  if(!parsed[ri]) parsed[ri]={n:'',l:'',s:''};
+  parsed[ri][key]=val;
+  s.body=parsed.map(p=>[p.n,p.l,p.s].join('|')).join('||');
+  _syncBodyPreview();
+}
+function vtblStatAdd(){
+  const s=APP.slides[devSlIdx];
+  s.body=(s.body?s.body+'||':'')+'0|Label|Detail';
+  refreshBodyEditor(); _syncBodyPreview();
+}
+function vtblStatDel(ri){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  items.splice(ri,1);
+  s.body=items.join('||');
+  refreshBodyEditor(); _syncBodyPreview();
+}
+
+// timeline helpers
+function vtblTlEdit(ri,key,val){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  const parsed=items.map(it=>{ const p=it.split('|'); return {e:p[0]||'',t:p[1]||'',d:p[2]||''}; });
+  if(!parsed[ri]) parsed[ri]={e:'',t:'',d:''};
+  parsed[ri][key]=val;
+  s.body=parsed.map(p=>[p.e,p.t,p.d].join('|')).join('||');
+  _syncBodyPreview();
+}
+function vtblTlAdd(){
+  const s=APP.slides[devSlIdx];
+  s.body=(s.body?s.body+'||':'')+'Year|Event|Description';
+  refreshBodyEditor(); _syncBodyPreview();
+}
+function vtblTlDel(ri){
+  const s=APP.slides[devSlIdx];
+  const items=s.body.split('||').filter(Boolean);
+  items.splice(ri,1);
+  s.body=items.join('||');
+  refreshBodyEditor(); _syncBodyPreview();
+}
+
+function refreshBodyEditor(){
+  const wrap=document.getElementById('vtbl-editor-wrap');
+  if(wrap) wrap.innerHTML=buildBodyEditorHTML(APP.slides[devSlIdx]);
+}
+
+function onTitleInput(){ const s=APP.slides[devSlIdx]; if(!s) return; s.title=document.getElementById('d-title').innerHTML; }
+function onBodyInput(){
+  const s=APP.slides[devSlIdx]; if(!s) return;
+  // Only update body from the preview textarea for simple/two-col layouts.
+  // Structured layouts keep body in sync via their own vtbl helpers.
+  if(!isStructuredLayout(s.layout||'simple')){
+    s.body=document.getElementById('d-body').textContent;
+  }
+}
 
 function renderProps(s,idx){ const dp=document.getElementById('dev-props'); if(!dp) return; dp.innerHTML=buildPropsHTML(s,idx); }
 
@@ -1344,14 +1475,14 @@ function buildPropsHTML(s,idx){
 function getLayoutHint(layout){
   const hints={
     simple:'Clean slide: large title + body paragraph.',
-    intro:'Title slide: centered. Body = subtitle. Use || to separate: <em>Subtitle||Date||Author</em>',
-    content:'Content cards: <em>Title::Body||Title2::Body2</em> — up to 4 cards.',
-    'two-col':'Split view: title left, visual grid right.',
-    bullets:'<em>Title::Detail||Title::Detail</em> — use || to separate.',
-    comparison:'<em>Header|A|B</em> on line 1, then rows. Use ✓ ✗ ~ for icons.',
-    difference:'<em>Aspect|OptionA|OptionB</em> on line 1, then rows.',
-    stats:'<em>Value|Label|Sub||Value|Label|Sub</em> — use || between cards.',
-    timeline:'<em>Era|Title|Description||</em> — use || between events.'
+    intro:'Title slide: centered. Use first row as subtitle, add rows for meta tags (year, author, etc).',
+    content:'Content cards: Title and body per card. Use | in body for bullet points within a card.',
+    'two-col':'Split view: title + body paragraph (same as Simple).',
+    bullets:'Each row: Title + Detail. Displayed as numbered bullets.',
+    comparison:'Header row first, then data rows. Use ✓ ✗ ~ for icons.',
+    difference:'Header row (Aspect|A|B) first, then data rows. Left column = aspect name.',
+    stats:'Each row: Number|Label|Subtext. Displayed as bold stat cards.',
+    timeline:'Each row: Era|Title|Description. Displayed as a vertical timeline.'
   };
   return hints[layout]||'Select a layout.';
 }
@@ -1361,8 +1492,16 @@ function rpToggle(id){ const body=document.getElementById('rpb-'+id),tog=documen
 // LIVE PREVIEW
 function liveLabel(){ const v=gv('pi-lbl'); document.getElementById('d-lbl').textContent=v; APP.slides[devSlIdx].label=v; }
 function liveTitle(){ const v=gv('pi-ttl'); document.getElementById('d-title').innerHTML=v; APP.slides[devSlIdx].title=v; }
-function liveBody(){ const v=gv('pi-bdy'); document.getElementById('d-body').textContent=v; APP.slides[devSlIdx].body=v; }
-function liveLayout(){ APP.slides[devSlIdx].layout=gv('pi-lay'); refreshBodyEditor(); }
+function liveBody(){
+  // Only called for simple/two-col layouts via the #pi-bdy textarea
+  const v=gv('pi-bdy');
+  document.getElementById('d-body').textContent=v;
+  APP.slides[devSlIdx].body=v;
+}
+function liveLayout(){
+  APP.slides[devSlIdx].layout=gv('pi-lay');
+  refreshBodyEditor();
+}
 function liveTitleSize(){ const v=parseInt(gv('pi-tsize'))||58; document.getElementById('d-title').style.fontSize=v+'px'; APP.slides[devSlIdx].titleSize=v; }
 function liveTitleColor(){ const v=gv('pi-tcolor'); document.getElementById('d-title').style.color=v; APP.slides[devSlIdx].titleColor=v; }
 function setTitleColor(c){ const el=document.getElementById('pi-tcolor'); if(el) el.value=c; document.getElementById('d-title').style.color=c; APP.slides[devSlIdx].titleColor=c; }
@@ -1441,17 +1580,38 @@ function initTBDragResize(layer){
   layer.addEventListener('click',e=>{ if(!e.target.closest('.tb-wrap')){ _tbSelIdx=-1; rebuildTBCanvas(); renderTBSelPanel(); } });
 }
 
-// SAVE / DELETE / ADD
+// ============================================================ SAVE / DELETE / ADD ============================================================
+// FIX: devSaveSlide now reads the body correctly for ALL layout types.
+// - Structured layouts (bullets, comparison, etc): body is already in APP.slides[devSlIdx].body
+//   via vtbl helpers. We DO NOT overwrite from #pi-bdy (which doesn't exist for these layouts).
+// - Simple/two-col layouts: body comes from #pi-bdy textarea.
+// This prevents the double-save corruption bug.
 async function devSaveSlide(){
   const s=APP.slides[devSlIdx];
-  s.label=gv('pi-lbl'); s.title=gv('pi-ttl'); s.body=gv('pi-bdy'); s.layout=gv('pi-lay');
-  s.titleSize=parseInt(gv('pi-tsize'))||58; s.titleColor=gv('pi-tcolor');
-  s.bodySize=parseInt(gv('pi-bsize'))||16; s.bodyColor=gv('pi-bcolor');
+
+  // Always safe to read these from their dedicated inputs
+  s.label = gv('pi-lbl') || s.label;
+  s.title = gv('pi-ttl') || s.title;
+  s.layout = gv('pi-lay') || s.layout;
+  s.titleSize = parseInt(gv('pi-tsize')) || s.titleSize || 58;
+  s.titleColor = gv('pi-tcolor') || s.titleColor;
+  s.bodySize = parseInt(gv('pi-bsize')) || s.bodySize || 16;
+  s.bodyColor = gv('pi-bcolor') || s.bodyColor;
+
+  // CRITICAL FIX: Only read body from the textarea for non-structured layouts.
+  // For structured layouts, APP.slides[devSlIdx].body is already correct from vtbl helpers.
+  if(!isStructuredLayout(s.layout)){
+    const bdyEl=document.getElementById('pi-bdy');
+    if(bdyEl) s.body=bdyEl.value;
+  }
+  // For structured layouts: s.body is already up-to-date. Nothing to do.
+
   devRenderList(); renderSlideThumbs(); initApp();
   syncMsg('💾 Saving...');
   await saveSlides();
   syncMsg(window._FB_READY?'✅ Saved — synced to all devices!':'✅ Saved locally.');
 }
+
 async function devDeleteSlide(){
   if(APP.slides.length<=1){ alert('Cannot delete the last slide!'); return; }
   if(!confirm('Delete slide "'+APP.slides[devSlIdx].label+'"?')) return;
@@ -1459,11 +1619,13 @@ async function devDeleteSlide(){
   devRenderList(); devPickSlide(devSlIdx); renderSlideThumbs(); await saveSlides();
   syncMsg(window._FB_READY?'🗑 Deleted — synced':'🗑 Deleted');
 }
+
 function devAddSlide(){
   APP.slides.push({id:Date.now(),label:'NEW SLIDE',title:'New <em>Theorem</em>',body:'State your mathematical content here. Use ∫ ∑ π ∞ freely.',layout:'simple',titleSize:58,titleColor:'#f5e6c8',bodySize:16,bodyColor:'#c8b89a',images:[],imageInterval:4});
   devSlIdx=APP.slides.length-1; devRenderList(); devPickSlide(devSlIdx); renderSlideThumbs(); initApp();
   syncMsg('✨ Slide added');
 }
+
 function devExport(){ const d=JSON.stringify({slides:APP.slides,members:APP.members},null,2); Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([d],{type:'application/json'})),download:'mathomega-backup.json'}).click(); syncMsg('📦 Backup downloaded'); }
 function devImport(inp){ const f=inp.files[0]; if(!f) return; const r=new FileReader(); r.onload=e=>{ try{ const p=JSON.parse(e.target.result); if(p.slides) APP.slides=p.slides; if(p.members) APP.members=p.members; initDev(); renderSlideThumbs(); initApp(); syncMsg('✓ Data imported!'); }catch(err){ alert('Invalid JSON.'); } }; r.readAsText(f); }
 
@@ -1475,15 +1637,17 @@ function applyTemplate(type){
     content:{layout:'content',body:'Core Definitions::Fundamental axioms and definitions that form the basis||Key Theorems::The main results we will prove and their significance||Worked Examples::Concrete applications demonstrating the theory||Open Problems::Outstanding questions and areas of active research'},
     bullets:{layout:'bullets',body:'Theorem 1::Statement and brief outline of proof technique||Theorem 2::Why this result is surprising and important||Corollary::Immediate consequence of the main theorem||Lemma::Supporting result needed for the proof||Conjecture::Unproven but believed to be true'},
     comparison:{layout:'comparison',body:'Feature|Calculus|Algebra\nCore Object|Functions|Structures\nFoundation|Limits|Axioms\nKey Tool|Derivative|Homomorphism\nApplication|Physics|Cryptography'},
+    difference:{layout:'difference',body:'Aspect|Pure Math|Applied Math\nGoal|Truth for its own sake|Solve real problems\nMethod|Rigorous proof|Mathematical modelling\nKey Areas|Number theory|Fluid dynamics\nOutput|Theorems|Algorithms'},
     stats:{layout:'stats',body:'∞|Infinities|Cantor proved some are larger||π|Pi|Transcendental number, ratio C/d||φ|Golden Ratio|(1+√5)/2 ≈ 1.618||e|Euler Number|Base of natural logarithm||0|Zero|The most powerful number||i|Imaginary|√(-1) extends the reals'},
-    timeline:{layout:'timeline',body:'300 BC|Euclid|Elements|13 books founding geometry and number theory||17th C|Newton & Leibniz|Calculus|Independently invented analysis||19th C|Gauss|Modern Mathematics|Rigorous proofs, number theory, complex analysis||1931|Gödel|Incompleteness|Proves limits of formal systems||Today|Millennium Problems|Seven Unsolved|$1M prize for each solution'}
+    timeline:{layout:'timeline',body:'300 BC|Euclid|Elements|13 books founding geometry and number theory||17th C|Newton & Leibniz|Calculus|Independently invented analysis||19th C|Gauss|Modern Mathematics|Rigorous proofs, number theory, complex analysis||1931|Gödel|Incompleteness|Proves limits of formal systems||Today|Millennium Problems|Seven Unsolved|$1M prize for each solution'},
+    'two-col':{layout:'two-col',body:'Compare these two approaches side by side. Edit this text to describe your content clearly and concisely.'}
   };
   const preset=examples[type]; if(!preset) return;
   s.layout=preset.layout; s.body=preset.body;
   const layEl=document.getElementById('pi-lay'); if(layEl) layEl.value=preset.layout;
-  const bEl=document.getElementById('pi-bdy'); if(bEl) bEl.value=preset.body;
   const bodyEl=document.getElementById('d-body'); if(bodyEl) bodyEl.textContent=preset.body;
   refreshBodyEditor();
+  _syncBodyPreview();
   syncMsg('✨ Template applied!');
 }
 
@@ -1500,7 +1664,6 @@ function switchDevTab(tab){
 // HOME EDITOR
 function initHomeEditor(){
   const m=APP.meta||{},hs=m.heroStyle||{};
-  const gn=(id)=>{ const el=document.getElementById(id); return el?el.value:''; };
   const fields=[
     ['home-subtitle',m.subtitle||''],['home-herosub',m.heroSub||''],
     ['home-line1',m.heroLine1||'THE LANGUAGE'],['home-line2',m.heroLine2||'OF THE'],['home-line3',m.heroLine3||'UNIVERSE'],
