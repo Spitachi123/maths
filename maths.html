@@ -797,7 +797,16 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           <div class="prop-section-title">🔑 API Key Manager</div>
           <div class="prop-group">
             <div class="prop-label">Paste Your Firebase Config</div>
-            <textarea id="apikey-input" class="prop-textarea" style="min-height:120px;font-family:var(--fm);font-size:9px;color:var(--green);letter-spacing:.3px"></textarea>
+            <textarea id="apikey-input" class="prop-textarea" style="min-height:120px;font-family:var(--fm);font-size:9px;color:var(--green);letter-spacing:.3px">{
+  "apiKey": "AIzaSyA3DRtq8BkYJ7N9GR9FcgS-RpjCnyVP3bA",
+  "authDomain": "my-math-project-f68fe.firebaseapp.com",
+  "databaseURL": "https://my-math-project-f68fe-default-rtdb.firebaseio.com",
+  "projectId": "my-math-project-f68fe",
+  "storageBucket": "my-math-project-f68fe.firebasestorage.app",
+  "messagingSenderId": "659226703492",
+  "appId": "1:659226703492:web:1bd1cac7b14ba4136c34d1",
+  "measurementId": "G-QXPH4VX2MW"
+}</textarea>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px">
             <button onclick="apikeyLoad()" style="padding:10px 6px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:var(--fm);font-size:8px;letter-spacing:1px;cursor:pointer;transition:all .2s">📥 LOAD</button>
