@@ -875,12 +875,12 @@ function applyFbConfig() {
   try {
     const cfg = JSON.parse(raw.startsWith('{') ? raw : '{'+raw+'}');
     if (!cfg.databaseURL) { msg.textContent='❌ Missing databaseURL'; msg.style.color='var(--red)'; return; }
-    localStorage.setItem('cx_fb_config', JSON.stringify(cfg));
+    localStorage.setItem('math_fb_config', JSON.stringify(cfg));
     msg.textContent='✅ Saved! Reloading...'; msg.style.color='var(--green)';
     setTimeout(()=>location.reload(), 1200);
   } catch(e) { msg.textContent='❌ Invalid JSON'; msg.style.color='var(--red)'; }
 }
-(function() { const saved=localStorage.getItem('cx_fb_config'); if(saved){ try{ window._CX_FIREBASE_CONFIG=JSON.parse(saved); }catch(e){} } })();
+(function() { const saved=localStorage.getItem('math_fb_config'); if(saved){ try{ window._CX_FIREBASE_CONFIG=JSON.parse(saved); }catch(e){} } })();
 
 // ============================================================ CURSOR ============================================================
 const curEl=document.getElementById('cur'), ringEl=document.getElementById('curRing');
@@ -1569,7 +1569,7 @@ function initHomeEditor(){
     ['home-btn1-label',m.btn1Label||'▶ PRESENT NOW »'],['home-btn2-label',m.btn2Label||'Meet the Team →'],
   ];
   fields.forEach(([id,val])=>{ const el=document.getElementById(id); if(el) el.value=val; });
-  const saved=localStorage.getItem('cx_apikey_store'); if(saved){ try{ renderApikeyChips(JSON.parse(saved)); }catch(e){} }
+  const saved=localStorage.getItem('math_apikey_store'); if(saved){ try{ renderApikeyChips(JSON.parse(saved)); }catch(e){} }
 }
 
 function applyHomeStyle(){
@@ -1596,8 +1596,8 @@ function liveHomeHeroSub(){ if(!APP.meta)APP.meta={}; APP.meta.heroSub=gv('home-
 async function saveHomeData(){ if(!APP.meta)APP.meta={}; applyHomeStyle(); APP.meta.heroSub=gv('home-herosub'); initApp(); const el=document.getElementById('home-sync-msg'); if(el){ el.textContent='💾 Saving...'; } await saveSlides(); if(el) el.textContent='✅ Home page saved!'; setTimeout(()=>{ if(el) el.textContent=''; },3000); }
 
 // API KEY MANAGER
-function apikeySave(){ const raw=document.getElementById('apikey-input').value.trim(),msg=document.getElementById('apikey-msg'); if(!raw){ msg.style.color='var(--red)'; msg.textContent='❌ Nothing to save.'; setTimeout(()=>msg.textContent='',2500); return; } try{ const clean=raw.startsWith('{')?raw:'{'+raw+'}'; const parsed=JSON.parse(clean); localStorage.setItem('cx_apikey_store',JSON.stringify(parsed)); msg.style.color='var(--green)'; msg.textContent='✅ Config saved!'; renderApikeyChips(parsed); setTimeout(()=>msg.textContent='',3000); }catch(e){ msg.style.color='var(--red)'; msg.textContent='❌ Invalid JSON.'; setTimeout(()=>msg.textContent='',3000); } }
-function apikeyLoad(){ const saved=localStorage.getItem('cx_apikey_store'),msg=document.getElementById('apikey-msg'); if(!saved){ msg.style.color='var(--muted)'; msg.textContent='⚠ No saved config.'; setTimeout(()=>msg.textContent='',2500); return; } try{ const parsed=JSON.parse(saved); document.getElementById('apikey-input').value=JSON.stringify(parsed,null,2); msg.style.color='var(--gold)'; msg.textContent='📥 Loaded!'; renderApikeyChips(parsed); setTimeout(()=>msg.textContent='',2500); }catch(e){ msg.style.color='var(--red)'; msg.textContent='❌ Corrupted.'; } }
+function apikeySave(){ const raw=document.getElementById('apikey-input').value.trim(),msg=document.getElementById('apikey-msg'); if(!raw){ msg.style.color='var(--red)'; msg.textContent='❌ Nothing to save.'; setTimeout(()=>msg.textContent='',2500); return; } try{ const clean=raw.startsWith('{')?raw:'{'+raw+'}'; const parsed=JSON.parse(clean); localStorage.setItem('math_apikey_store',JSON.stringify(parsed)); msg.style.color='var(--green)'; msg.textContent='✅ Config saved!'; renderApikeyChips(parsed); setTimeout(()=>msg.textContent='',3000); }catch(e){ msg.style.color='var(--red)'; msg.textContent='❌ Invalid JSON.'; setTimeout(()=>msg.textContent='',3000); } }
+function apikeyLoad(){ const saved=localStorage.getItem('math_apikey_store'),msg=document.getElementById('apikey-msg'); if(!saved){ msg.style.color='var(--muted)'; msg.textContent='⚠ No saved config.'; setTimeout(()=>msg.textContent='',2500); return; } try{ const parsed=JSON.parse(saved); document.getElementById('apikey-input').value=JSON.stringify(parsed,null,2); msg.style.color='var(--gold)'; msg.textContent='📥 Loaded!'; renderApikeyChips(parsed); setTimeout(()=>msg.textContent='',2500); }catch(e){ msg.style.color='var(--red)'; msg.textContent='❌ Corrupted.'; } }
 function apikeyCopy(){ const val=document.getElementById('apikey-input').value.trim(),msg=document.getElementById('apikey-msg'); if(!val){ msg.style.color='var(--red)'; msg.textContent='❌ Nothing to copy.'; setTimeout(()=>msg.textContent='',2500); return; } navigator.clipboard.writeText(val).then(()=>{ msg.style.color='var(--green)'; msg.textContent='📋 Copied!'; setTimeout(()=>msg.textContent='',2500); }).catch(()=>{ const ta=document.getElementById('apikey-input'); ta.select(); document.execCommand('copy'); msg.style.color='var(--green)'; msg.textContent='📋 Copied!'; setTimeout(()=>msg.textContent='',2500); }); }
 function renderApikeyChips(obj){ const wrap=document.getElementById('apikey-chips'); if(!wrap) return; const fields=['apiKey','authDomain','databaseURL','projectId','storageBucket','messagingSenderId','appId']; wrap.innerHTML=fields.filter(k=>obj[k]).map(k=>`<div onclick="chipCopy('${k}','${(obj[k]||'').replace(/'/g,"\\'")}')" style="display:flex;align-items:center;gap:6px;padding:5px 10px;background:var(--panel);border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:var(--fm);font-size:7px;letter-spacing:1px" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'"><span style="color:var(--muted)">${k}</span><span style="color:var(--white);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${obj[k]}</span><span style="color:var(--gold)">📋</span></div>`).join(''); }
 function chipCopy(key,val){ navigator.clipboard.writeText(val).catch(()=>{}); const msg=document.getElementById('apikey-msg'); msg.style.color='var(--green)'; msg.textContent=`📋 Copied ${key}!`; setTimeout(()=>msg.textContent='',2000); }
