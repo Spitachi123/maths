@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Mammalia — Field Catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Mono:wght@400;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171b16;
+    --paper:#EDE7D6;
+    --paper-dim:#E3DCC7;
+    --plate:#1C2A20;
+    --plate-deep:#12190F;
+    --plate-line: rgba(237,231,214,0.14);
+    --gold:#C7A339;
+    --gold-soft: rgba(199,163,57,0.35);
+    --gold-bright:#E6C15A;
+    --pin:#8C2F26;
+    --pin-soft: rgba(140,47,38,0.5);
+    --moss:#4F6B4A;
+    --rivet: #4a3d1f;
+    --shadow: 0 30px 60px -25px rgba(0,0,0,0.55);
+    --ease-out: cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; height:100%;
+    background:var(--plate-deep);
+    color:var(--ink);
+    font-family:'Public Sans', sans-serif;
+    overflow:hidden;
+  }
+  ::selection{ background:var(--gold-soft); }
+
+  .deck{
+    position:relative;
+    width:100vw; height:100vh;
+    background:
+      radial-gradient(120% 140% at 12% -10%, rgba(199,163,57,0.10), transparent 55%),
+      radial-gradient(90% 120% at 100% 110%, rgba(140,47,38,0.14), transparent 55%),
+      var(--plate);
+  }
+
+  /* faint paper-grain texture */
+  .deck::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, var(--plate-line) 0 1px, transparent 1px 120px),
+      repeating-linear-gradient(0deg, var(--plate-line) 0 1px, transparent 1px 120px);
+    opacity:0.35;
+    pointer-events:none;
+    z-index:0;
+  }
+  /* soft vignette + fine grain for a printed-plate feel */
+  .deck::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,0.38) 100%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: cover, 140px 140px;
+    mix-blend-mode: overlay;
+    opacity:0.16;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* thin progress rail across the very top */
+  .progress-rail{
+    position:fixed; top:0; left:0; right:0; height:2px;
+    background:rgba(237,231,214,0.08); z-index:25;
+  }
+  .progress-rail i{
+    display:block; height:100%; width:12.5%;
+    background:linear-gradient(90deg, var(--moss), var(--gold));
+    transition: width .55s var(--ease-out);
+  }
+
+  .slide{
+    position:absolute; inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    transform: translateY(24px) scale(0.985);
+    transition: opacity .65s var(--ease-out), transform .65s var(--ease-out), visibility 0s linear .65s;
+    z-index:1;
+  }
+  .slide.active{
+    opacity:1; visibility:visible; transform:translateY(0) scale(1);
+    transition: opacity .65s var(--ease-out), transform .65s var(--ease-out), visibility 0s linear 0s;
+    z-index:2;
+  }
+
+  .stage{
+    width:min(1180px, 92vw);
+    height:min(700px, 86vh);
+    position:relative;
+  }
+
+  /* ---------- reveal choreography ---------- */
+  @keyframes revealUp{ from{ opacity:0; transform:translateY(12px);} to{ opacity:1; transform:translateY(0);} }
+  @keyframes revealScale{ from{ opacity:0; transform:scale(.96);} to{ opacity:1; transform:scale(1);} }
+
+  .eyebrow, .kicker-latin, .headline, .body-copy, .trait-list li,
+  .title-eyebrow, .mega, .mega-latin, .title-facts .fact, .art-col,
+  .facts-stage .eyebrow, .facts-stage .headline, .fact-card,
+  .grid-stage .eyebrow, .grid-stage .headline, .grid-stage .body-copy, .group-card,
+  .close-stage > *{
+    opacity:0;
+  }
+  .slide.active .eyebrow{ animation: revealUp .6s var(--ease-out) forwards .05s; }
+  .slide.active .kicker-latin{ animation: revealUp .6s var(--ease-out) forwards .08s; }
+  .slide.active .headline{ animation: revealUp .6s var(--ease-out) forwards .14s; }
+  .slide.active .body-copy{ animation: revealUp .6s var(--ease-out) forwards .22s; }
+  .slide.active .trait-list li{ animation: revealUp .5s var(--ease-out) forwards; }
+  .slide.active .trait-list li:nth-child(1){ animation-delay:.30s; }
+  .slide.active .trait-list li:nth-child(2){ animation-delay:.38s; }
+  .slide.active .trait-list li:nth-child(3){ animation-delay:.46s; }
+  .slide.active .trait-list li:nth-child(4){ animation-delay:.54s; }
+  .slide.active .art-col{ animation: revealScale .7s var(--ease-out) forwards .16s; }
+
+  .slide.active .title-eyebrow{ animation: revealUp .6s var(--ease-out) forwards .05s; }
+  .slide.active .mega{ animation: revealUp .7s var(--ease-out) forwards .12s; }
+  .slide.active .mega-latin{ animation: revealUp .6s var(--ease-out) forwards .22s; }
+  .slide.active .title-facts .fact{ animation: revealUp .55s var(--ease-out) forwards; }
+  .slide.active .title-facts .fact:nth-child(1){ animation-delay:.32s; }
+  .slide.active .title-facts .fact:nth-child(2){ animation-delay:.42s; }
+  .slide.active .title-visual{ animation: revealScale .75s var(--ease-out) forwards .18s; }
+
+  .slide.active .grid-stage .eyebrow{ animation: revealUp .6s var(--ease-out) forwards .05s; }
+  .slide.active .grid-stage .headline{ animation: revealUp .6s var(--ease-out) forwards .12s; }
+  .slide.active .grid-stage .body-copy{ animation: revealUp .6s var(--ease-out) forwards .2s; }
+  .slide.active .group-card{ animation: revealUp .55s var(--ease-out) forwards; }
+  .slide.active .group-card:nth-child(1){ animation-delay:.28s; }
+  .slide.active .group-card:nth-child(2){ animation-delay:.36s; }
+  .slide.active .group-card:nth-child(3){ animation-delay:.44s; }
+  .slide.active .group-card:nth-child(4){ animation-delay:.52s; }
+
+  .slide.active .facts-stage .eyebrow{ animation: revealUp .6s var(--ease-out) forwards .05s; }
+  .slide.active .facts-stage .headline{ animation: revealUp .6s var(--ease-out) forwards .12s; }
+  .slide.active .fact-card{ animation: revealUp .5s var(--ease-out) forwards; }
+  .slide.active .fact-card:nth-child(1){ animation-delay:.22s; }
+  .slide.active .fact-card:nth-child(2){ animation-delay:.28s; }
+  .slide.active .fact-card:nth-child(3){ animation-delay:.34s; }
+  .slide.active .fact-card:nth-child(4){ animation-delay:.40s; }
+  .slide.active .fact-card:nth-child(5){ animation-delay:.46s; }
+  .slide.active .fact-card:nth-child(6){ animation-delay:.52s; }
+
+  .slide.active .close-stage > *{ animation: revealUp .6s var(--ease-out) forwards; }
+  .slide.active .close-stage > *:nth-child(1){ animation-delay:.10s; }
+  .slide.active .close-stage > *:nth-child(2){ animation-delay:.22s; }
+  .slide.active .close-stage > *:nth-child(3){ animation-delay:.30s; }
+  .slide.active .close-stage > *:nth-child(4){ animation-delay:.38s; }
+  .slide.active .close-stage > *:nth-child(5){ animation-delay:.46s; }
+  .slide.active .close-stage > *:nth-child(6){ animation-delay:.54s; }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{ animation:none !important; transition:none !important; }
+    .eyebrow, .kicker-latin, .headline, .body-copy, .trait-list li,
+    .title-eyebrow, .mega, .mega-latin, .title-facts .fact, .art-col,
+    .facts-stage .eyebrow, .facts-stage .headline, .fact-card,
+    .grid-stage .eyebrow, .grid-stage .headline, .grid-stage .body-copy, .group-card,
+    .close-stage > *, .title-visual{ opacity:1; transform:none; }
+  }
+
+  /* ---------- shared: eyebrow / specimen tag / heading ---------- */
+  .eyebrow{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Mono', monospace;
+    font-size:12.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--pin); box-shadow:0 0 0 3px var(--pin-soft); }
+  .eyebrow .rule{ flex:1; height:1px; background:linear-gradient(90deg,var(--gold-soft),transparent); }
+
+  h1.headline{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--paper);
+    letter-spacing:-0.01em;
+    line-height:0.98;
+    margin:0 0 10px 0;
+  }
+  .kicker-latin{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--moss);
+    background:rgba(79,107,74,0.18);
+    display:inline-block;
+    padding:2px 10px;
+    border-radius:3px;
+    font-size:14px;
+    margin-bottom:16px;
+  }
+  .body-copy{
+    font-size:16px;
+    line-height:1.62;
+    color:rgba(237,231,214,0.86);
+    max-width:46ch;
+  }
+
+  /* ---------- specimen plate (image window) ---------- */
+  .plate-frame{
+    position:relative;
+    border-radius:6px;
+    padding:10px;
+    background: linear-gradient(155deg, #29392C, #1A2517);
+    box-shadow: var(--shadow), inset 0 0 0 1px rgba(199,163,57,0.25);
+  }
+  /* brass corner rivets — ties every specimen frame back to the mounting-board motif */
+  .plate-frame::before{
+    content:"";
+    position:absolute; inset:0;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle at center, var(--gold-bright) 0%, var(--rivet) 70%, transparent 72%),
+      radial-gradient(circle at center, var(--gold-bright) 0%, var(--rivet) 70%, transparent 72%),
+      radial-gradient(circle at center, var(--gold-bright) 0%, var(--rivet) 70%, transparent 72%),
+      radial-gradient(circle at center, var(--gold-bright) 0%, var(--rivet) 70%, transparent 72%);
+    background-repeat:no-repeat;
+    background-size:6px 6px;
+    background-position: 9px 9px, calc(100% - 9px) 9px, 9px calc(100% - 9px), calc(100% - 9px) calc(100% - 9px);
+    opacity:0.85;
+    z-index:2;
+  }
+  .plate-window{
+    position:relative;
+    overflow:hidden;
+    border-radius:2px;
+    background-color:#141d10;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35), inset 0 40px 60px -40px rgba(0,0,0,0.6);
+  }
+  /* duotone tint ties real photography back into the illustrated-plate palette */
+  .plate-window::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(199,163,57,0.22), rgba(18,25,15,0.5));
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .plate-window::after{
+    content:"";
+    position:absolute; inset:0;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.28);
+    pointer-events:none;
+  }
+  .plate-tag{
+    position:absolute; left:16px; bottom:-16px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.03em;
+    padding:7px 12px;
+    border-radius:2px;
+    box-shadow: var(--shadow);
+    display:flex; align-items:center; gap:8px;
+    z-index:3;
+    transform: rotate(-0.6deg);
+  }
+  .plate-tag .pin{
+    width:9px;height:9px;border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, #e6c15a, var(--gold));
+    box-shadow:0 1px 2px rgba(0,0,0,.5);
+  }
+  .plate-tag i{ font-style:italic; color:var(--moss); }
+
+  .specimen-stamp{
+    position:absolute; top:14px; right:14px;
+    border:1.5px solid var(--pin);
+    color:var(--pin);
+    font-family:'Space Mono', monospace;
+    font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 8px; border-radius:2px;
+    transform: rotate(4deg);
+    opacity:0.85;
+    background:rgba(237,231,214,0.06);
+    z-index:3;
+  }
+
+  /* ---------- progress / nav ---------- */
+  .catalog-index{
+    position:fixed; top:26px; left:36px; z-index:20;
+    font-family:'Space Mono', monospace; font-size:12px; letter-spacing:.08em;
+    color:rgba(237,231,214,0.55);
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .catalog-index b{ color:var(--gold); font-weight:700; }
+
+  .dots{
+    position:fixed; bottom:28px; left:50%; transform:translateX(-50%);
+    display:flex; gap:10px; z-index:20;
+    background:rgba(18,25,15,0.35);
+    backdrop-filter: blur(6px);
+    padding:8px 12px; border-radius:20px;
+    border:1px solid rgba(237,231,214,0.08);
+  }
+  .dots button{
+    width:9px; height:9px; border-radius:50%;
+    border:1px solid rgba(199,163,57,0.55);
+    background:transparent;
+    cursor:pointer; padding:0;
+    transition: all .3s ease;
+  }
+  .dots button.active{ background:var(--gold); box-shadow:0 0 0 4px rgba(199,163,57,0.18); }
+  .dots button:hover{ border-color:var(--gold); transform:scale(1.15); }
+
+  .navbtn{
+    position:fixed; top:50%; transform:translateY(-50%);
+    z-index:20; width:46px; height:46px; border-radius:50%;
+    border:1px solid rgba(237,231,214,0.18);
+    background:rgba(23,32,22,0.55);
+    backdrop-filter: blur(6px);
+    color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:18px;
+    transition: all .25s ease;
+  }
+  .navbtn:hover{ border-color:var(--gold); color:var(--gold); background:rgba(23,32,22,0.85); transform:translateY(-50%) scale(1.06); }
+  .navbtn.prev{ left:24px; }
+  .navbtn.next{ right:24px; }
+  @media (max-width:820px){ .navbtn{display:none;} }
+
+  button:focus-visible, .navbtn:focus-visible, .dots button:focus-visible{
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 3px;
+  }
+
+  .brand{
+    position:fixed; top:26px; right:36px; z-index:20;
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(237,231,214,0.4);
+  }
+  .keys-hint{
+    position:fixed; bottom:30px; right:36px; z-index:20;
+    font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:.06em;
+    color:rgba(237,231,214,0.3);
+    display:flex; align-items:center; gap:6px;
+  }
+  @media (max-width:820px){ .keys-hint{ display:none; } }
+
+  /* ---------- layout helpers ---------- */
+  .split{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+    height:100%;
+  }
+  .split.reverse{ grid-template-columns: 0.95fr 1.05fr; }
+  .split.reverse .text-col{ order:2; }
+  .split.reverse .art-col{ order:1; }
+
+  ul.trait-list{ list-style:none; margin:22px 0 0 0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  ul.trait-list li{
+    display:flex; gap:14px; align-items:flex-start;
+    font-size:15px; line-height:1.55; color:rgba(237,231,214,0.9);
+  }
+  ul.trait-list li .tag{
+    flex:0 0 auto;
+    font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:.06em;
+    color:var(--plate-deep); background:var(--gold);
+    padding:3px 7px; border-radius:2px; margin-top:2px; white-space:nowrap;
+  }
+  ul.trait-list li strong{ color:var(--paper); font-weight:600; }
+
+  .art-col{ display:flex; justify-content:center; }
+  .art-col .plate-frame{ width:100%; max-width:440px; }
+  .art-col .plate-window{ aspect-ratio: 4 / 3; width:100%; }
+
+  /* ---------- title slide ---------- */
+  .title-stage{
+    width:min(1180px,92vw); height:min(700px,86vh);
+    display:grid; grid-template-columns: 1fr 1fr; gap:60px; align-items:center;
+  }
+  .title-visual .plate-frame{ padding:14px; }
+  .title-visual .plate-window{ width:100%; aspect-ratio: 4/5; }
+  .title-eyebrow{
+    font-family:'Space Mono', monospace; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--moss); margin-bottom:22px;
+  }
+  h1.mega{
+    font-family:'Fraunces', serif; font-weight:700; font-size:clamp(48px,6.2vw,84px);
+    color:var(--paper); line-height:0.94; letter-spacing:-0.015em; margin:0 0 8px 0;
+  }
+  .mega-latin{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    color:var(--gold); font-size:clamp(20px,2.4vw,28px); margin-bottom:26px;
+  }
+  .title-facts{ margin-top:28px; display:flex; flex-direction:column; gap:16px; }
+  .title-facts .fact{ display:flex; gap:14px; align-items:flex-start; }
+  .title-facts .num{
+    font-family:'Space Mono',monospace; color:var(--pin); font-size:13px; margin-top:3px;
+  }
+  .title-facts p{ margin:0; color:rgba(237,231,214,0.85); font-size:15px; line-height:1.6; max-width:44ch; }
+  .title-facts strong{ color:var(--paper); }
+
+  /* ---------- classification grid slide ---------- */
+  .grid-stage{ width:min(1180px,94vw); max-height:100%; overflow:visible; }
+  .grid-groups{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:26px;
+  }
+  .group-card{
+    background:linear-gradient(160deg,#25342A,#182014);
+    border-radius:8px; padding:16px; box-shadow: var(--shadow), inset 0 0 0 1px rgba(199,163,57,0.18);
+    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), inset 0 0 0 1px rgba(199,163,57,0.18);
+  }
+  .group-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 34px 60px -22px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(199,163,57,0.4);
+  }
+  .group-card .plate-window{ width:100%; aspect-ratio:4/3; border-radius:3px; }
+  .group-card h4{
+    font-family:'Fraunces', serif; font-weight:600; color:var(--paper); font-size:16px; margin:14px 0 4px;
+  }
+  .group-card p{ font-family:'Space Mono',monospace; font-size:11px; color:rgba(237,231,214,0.6); margin:0; letter-spacing:.02em; }
+
+  /* ---------- fun facts slide ---------- */
+  .facts-stage{ width:min(1220px,95vw); max-height:100%; overflow:visible; }
+  .facts-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px;
+  }
+  .fact-card{
+    background:linear-gradient(160deg,#25342A,#182014);
+    border-radius:8px; overflow:hidden;
+    box-shadow: var(--shadow), inset 0 0 0 1px rgba(199,163,57,0.16);
+    display:flex; flex-direction:column;
+    cursor:default;
+    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+  }
+  .fact-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 30px 54px -20px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(199,163,57,0.38);
+  }
+  .fact-card .thumb{ height:100px; background-repeat:no-repeat; background-size:cover; background-position:center; position:relative; background-color:#1A2517; transition: transform .5s var(--ease-out); }
+  .fact-card:hover .thumb{ transform: scale(1.04); }
+  .fact-card .thumb::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(199,163,57,0.22), rgba(18,25,15,0.55));
+    mix-blend-mode:multiply;
+  }
+  .fact-card .thumb::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(18,25,15,0) 40%, rgba(18,25,15,0.85)); }
+  .fact-card .thumb.diagram-thumb{
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'><polyline points='0,30 40,30 55,8 70,52 85,18 100,30 200,30' fill='none' stroke='%23C7A339' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/></svg>"),
+      linear-gradient(160deg,#2C3E30,#182014);
+    background-repeat:no-repeat, no-repeat;
+    background-size:78% auto, cover;
+    background-position:center 60%, center;
+  }
+  .fact-card .thumb.diagram-thumb::before{ content:none; }
+  .fact-card .thumb .lbl{
+    position:absolute; left:10px; bottom:8px; font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:.05em; text-transform:uppercase;
+    z-index:1;
+  }
+  .fact-card .fc-body{ padding:13px 16px 15px; }
+  .fact-card h5{ font-family:'Fraunces',serif; font-weight:600; color:var(--paper); font-size:14.5px; margin:0 0 6px; }
+  .fact-card p{ font-size:12.6px; line-height:1.48; color:rgba(237,231,214,0.78); margin:0; }
+
+  /* ---------- closing ---------- */
+  .close-stage{ text-align:center; display:flex; flex-direction:column; align-items:center; }
+  .close-stage .mega-latin{ margin-bottom:0; }
+  .credit-line{
+    font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.03em;
+    color:rgba(237,231,214,0.35); margin-top:22px; max-width:56ch;
+  }
+  .restart-btn{
+    margin-top:26px;
+    font-family:'Space Mono', monospace; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--paper); background:transparent;
+    border:1px solid var(--gold-soft); border-radius:24px;
+    padding:11px 22px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px;
+    transition: all .3s ease;
+  }
+  .restart-btn:hover{ border-color:var(--gold); background:rgba(199,163,57,0.1); color:var(--gold-bright); transform:translateY(-2px); }
+
+  @media (max-width: 900px){
+    .split{ grid-template-columns:1fr; gap:26px; }
+    .split.reverse .text-col{ order:1; } .split.reverse .art-col{ order:2; }
+    .title-stage{ grid-template-columns:1fr; gap:26px; }
+    .grid-groups{ grid-template-columns:repeat(2,1fr); }
+    .facts-grid{ grid-template-columns:repeat(2,1fr); }
+    .stage, .grid-stage, .facts-stage{ height:auto; }
+    h1.mega{ font-size:44px; }
+    body{ overflow-y:auto; }
+    .deck{ height:auto; min-height:100vh; padding:70px 0 100px; }
+    .slide{ position:relative; inset:auto; min-height:calc(100vh - 170px); padding:20px 16px; }
+    .dots{ bottom:18px; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <div class="progress-rail"><i id="progressFill"></i></div>
+  <div class="catalog-index">PLATE <b id="plateNow">01</b> / <span id="plateTotal">08</span></div>
+  <div class="brand">Field Catalog — Vertebrata</div>
+  <div class="keys-hint">◂ ▸ navigate</div>
+
+  <!-- SLIDE 1 : TITLE -->
+  <section class="slide active" data-title="Cover">
+    <div class="title-stage">
+      <div>
+        <div class="title-eyebrow">Specimen Class · Chordata → Mammalia</div>
+        <h1 class="mega">Class<br>Mammalia</h1>
+        <div class="mega-latin">a field catalog of the warm&#8209;blooded</div>
+        <div class="title-facts">
+          <div class="fact">
+            <span class="num">ETY</span>
+            <p><strong>Etymology.</strong> From the Latin <em>mamma</em>, meaning breast — the origin of the class's name.</p>
+          </div>
+          <div class="fact">
+            <span class="num">STA</span>
+            <p><strong>Status in the animal kingdom.</strong> The largest group of vertebrates on Earth, and widely regarded as the most intelligent and advanced.</p>
+          </div>
+        </div>
+      </div>
+      <div class="title-visual">
+        <div class="plate-frame">
+          <div class="specimen-stamp">Live Specimen</div>
+          <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Duck-billed_platypus_%28Ornithorhynchus_anatinus%29_Scottsdale.jpg?width=900');"></div>
+        </div>
+        <div class="plate-tag" style="position:static; margin-top:-16px; margin-left:16px; width:max-content;"><span class="pin"></span> Ornithorhynchus anatinus <i>— platypus</i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 : EXTERNAL ANATOMY -->
+  <section class="slide" data-title="External Anatomy">
+    <div class="stage">
+      <div class="split">
+        <div class="text-col">
+          <div class="eyebrow"><span class="dot"></span>External Anatomy &amp; Physical Traits<span class="rule"></span></div>
+          <h1 class="headline" style="font-size:clamp(30px,4vw,44px);">Built the same way,<br>worn a thousand ways</h1>
+          <p class="body-copy">Every mammal shares one blueprint beneath wildly different coats, ears, and gaits.</p>
+          <ul class="trait-list">
+            <li><span class="tag">Body</span><div><strong>Four regions.</strong> The body divides into head, neck, trunk, and tail (where present).</div></li>
+            <li><span class="tag">Coat</span><div><strong>Hair.</strong> A covering of hair or fur is present on every mammal, at some life stage.</div></li>
+            <li><span class="tag">Ears</span><div><strong>Pinnae.</strong> Mammals possess externally projecting ears — a trait unique to this class.</div></li>
+            <li><span class="tag">Move</span><div><strong>Locomotion.</strong> Typically achieved with two pairs of limbs — reduced to two, for walking, in humans.</div></li>
+          </ul>
+        </div>
+        <div class="art-col">
+          <div class="plate-frame">
+            <div class="specimen-stamp">Plate 02</div>
+            <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Elephant.jpg?width=900'); background-position:center 30%;"></div>
+            <div class="plate-tag"><span class="pin"></span> Loxodonta africana <i>— African elephant, pinnae detail</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 : INTERNAL PHYSIOLOGY -->
+  <section class="slide" data-title="Internal Physiology">
+    <div class="stage">
+      <div class="split reverse">
+        <div class="art-col">
+          <div class="plate-frame">
+            <div class="specimen-stamp">Plate 03</div>
+            <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Killerwhales_jumping.jpg?width=900');"></div>
+            <div class="plate-tag"><span class="pin"></span> Orcinus orca <i>— orca, surfacing to breathe</i></div>
+          </div>
+        </div>
+        <div class="text-col">
+          <div class="eyebrow"><span class="dot"></span>Internal Physiology &amp; Respiration<span class="rule"></span></div>
+          <h1 class="headline" style="font-size:clamp(30px,4vw,44px);">Lungs, not gills —<br>even at sea</h1>
+          <ul class="trait-list">
+            <li><span class="tag">Breath</span><div><strong>Respiration.</strong> Mammals breathe using lungs, full stop.</div></li>
+            <li><span class="tag">Ocean</span><div><strong>Aquatic adaptation.</strong> Whales and dolphins have no gills — they must surface to draw air.</div></li>
+            <li><span class="tag">Heart</span><div><strong>Circulation.</strong> A four-chambered heart: two atria, two ventricles.</div></li>
+            <li><span class="tag">Temp</span><div><strong>Thermal regulation.</strong> Endothermic — internal body temperature stays constant regardless of surroundings.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 : NEURAL DEVELOPMENT -->
+  <section class="slide" data-title="Neural Development">
+    <div class="stage">
+      <div class="split">
+        <div class="text-col">
+          <div class="eyebrow"><span class="dot"></span>Neural Development &amp; Intelligence<span class="rule"></span></div>
+          <h1 class="headline" style="font-size:clamp(30px,4vw,44px);">The mammalian<br>advantage</h1>
+          <ul class="trait-list">
+            <li><span class="tag">Brain</span><div><strong>Neocortex.</strong> The mammalian brain features a distinct outer region unseen in other vertebrate classes.</div></li>
+            <li><span class="tag">Role</span><div><strong>Function.</strong> This region governs higher-level thought, complex problem-solving, and advanced intelligence.</div></li>
+          </ul>
+          <p class="body-copy" style="margin-top:18px;">It's the same tissue that lets a macaque plan, a dolphin recognise its reflection, and a human read this sentence.</p>
+        </div>
+        <div class="art-col" style="gap:18px; flex-direction:column; align-items:stretch;">
+          <div class="plate-frame">
+            <div class="specimen-stamp">Plate 04</div>
+            <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Long_Tailed_Macaque.jpg?width=900');"></div>
+            <div class="plate-tag"><span class="pin"></span> Macaca fascicularis <i>— macaque</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 : REPRODUCTION -->
+  <section class="slide" data-title="Reproduction">
+    <div class="stage">
+      <div class="split reverse">
+        <div class="art-col">
+          <div class="plate-frame">
+            <div class="specimen-stamp">Plate 05</div>
+            <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Fallow_deer_doe.jpg?width=900');"></div>
+            <div class="plate-tag"><span class="pin"></span> Dama dama <i>— fallow deer, doe</i></div>
+          </div>
+        </div>
+        <div class="text-col">
+          <div class="eyebrow"><span class="dot"></span>Reproduction &amp; Early Life<span class="rule"></span></div>
+          <h1 class="headline" style="font-size:clamp(30px,4vw,44px);">Milk first,<br>independence later</h1>
+          <ul class="trait-list">
+            <li><span class="tag">Milk</span><div><strong>Nourishment.</strong> Mammalian mothers produce milk to suckle their young after birth.</div></li>
+            <li><span class="tag">Birth</span><div><strong>Live birth.</strong> Most mammals give birth to live young (viviparous) — monotremes are the exception.</div></li>
+            <li><span class="tag">Fert.</span><div><strong>Fertilization.</strong> Internal, with separate sexes (unisexual).</div></li>
+          </ul>
+          <p class="body-copy" style="margin-top:16px; font-size:14px;">Exception on file: the platypus lays eggs — see <em>Plate 06</em>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 : CLASSIFICATION -->
+  <section class="slide" data-title="Classification">
+    <div class="stage grid-stage">
+      <div class="eyebrow"><span class="dot"></span>Classification &amp; Examples<span class="rule"></span></div>
+      <h1 class="headline" style="font-size:clamp(28px,3.6vw,40px);">Mammals across every environment</h1>
+      <p class="body-copy">One body plan, deployed on land, in water, and in the air.</p>
+      <div class="grid-groups">
+        <div class="group-card">
+          <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kangaroo_and_joey03.jpg?width=700');"></div>
+          <h4>Land mammals</h4>
+          <p>Humans · horses · cows · squirrels · monkeys · kangaroos</p>
+        </div>
+        <div class="group-card">
+          <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Bottlenose_Dolphin.jpg?width=700');"></div>
+          <h4>Aquatic mammals</h4>
+          <p>Blue whales · dolphins</p>
+        </div>
+        <div class="group-card">
+          <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Lyles_Flying_Fox_1.JPG?width=700');"></div>
+          <h4>Aerial mammals</h4>
+          <p>Bats — true flight</p>
+        </div>
+        <div class="group-card">
+          <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Duck-billed_platypus_%28Ornithorhynchus_anatinus%29_Scottsdale.jpg?width=700');"></div>
+          <h4>Monotremes</h4>
+          <p>Duck-billed platypus — egg-laying</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 : FUN FACTS -->
+  <section class="slide" data-title="Fun Facts">
+    <div class="stage facts-stage">
+      <div class="eyebrow"><span class="dot"></span>Field Notes &amp; Trivia<span class="rule"></span></div>
+      <h1 class="headline" style="font-size:clamp(28px,3.6vw,38px);">Notes from the margins</h1>
+      <div class="facts-grid" id="factsGrid">
+        <div class="fact-card">
+          <div class="thumb" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Blue-whale.jpg?width=500');"><span class="lbl">Cetacea</span></div>
+          <div class="fc-body">
+            <h5>The giant of the sea</h5>
+            <p>Blue whales are the largest animals ever to exist — up to 200 tons, heavier than 30 adult elephants combined.</p>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="thumb diagram-thumb"><span class="lbl">Circulation</span></div>
+          <div class="fc-body">
+            <h5>A heart like a car</h5>
+            <p>A blue whale's heart weighs as much as a small car — a person could swim through its largest arteries.</p>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="thumb" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Elephant.jpg?width=500'); background-position:center 25%;"><span class="lbl">Anatomy</span></div>
+          <div class="fc-body">
+            <h5>Unique ear flaps</h5>
+            <p>External pinnae belong to mammals alone — birds, reptiles, and amphibians have ear openings but no flaps.</p>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="thumb" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Bottlenose_Dolphin.jpg?width=500');"><span class="lbl">Cognition</span></div>
+          <div class="fc-body">
+            <h5>Mirror-smart dolphins</h5>
+            <p>Dolphins use the neocortex to recognise their own reflection and even wrap sponges around their noses as tools.</p>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="thumb" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Duck-billed_platypus_%28Ornithorhynchus_anatinus%29_Scottsdale.jpg?width=500');"><span class="lbl">Monotremata</span></div>
+          <div class="fc-body">
+            <h5>No nipples, no problem</h5>
+            <p>The platypus has no teats — it secretes milk through its skin, and babies lap it from the mother's fur.</p>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="thumb" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Lyles_Flying_Fox_1.JPG?width=500');"><span class="lbl">Chiroptera</span></div>
+          <div class="fc-body">
+            <h5>The only true flier</h5>
+            <p>Bats are the sole mammals capable of true, sustained flight — flying squirrels merely glide.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8 : CLOSING -->
+  <section class="slide" data-title="Closing">
+    <div class="stage close-stage">
+      <div class="plate-frame" style="width:220px; margin:0 auto 26px;">
+        <div class="plate-window" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Duck-billed_platypus_%28Ornithorhynchus_anatinus%29_Scottsdale.jpg?width=600'); aspect-ratio:1/1;"></div>
+      </div>
+      <div class="title-eyebrow" style="justify-content:center;">End of Catalog</div>
+      <h1 class="mega" style="font-size:clamp(36px,5vw,60px);">Class Mammalia</h1>
+      <div class="mega-latin">specimens logged, field notes closed</div>
+      <p class="body-copy" style="max-width:52ch; margin:14px auto 0; text-align:center;">Eight plates, one class, and a shared blueprint of hair, milk, and a warm heart — worn differently by every species that carries it.</p>
+      <button class="restart-btn" id="restartBtn">↺ Return to Plate 01</button>
+      <p class="credit-line">Specimen photography courtesy of Wikimedia Commons contributors, used under their respective open licenses.</p>
+    </div>
+  </section>
+
+  <button class="navbtn prev" id="prevBtn" aria-label="Previous slide">&#8592;</button>
+  <button class="navbtn next" id="nextBtn" aria-label="Next slide">&#8594;</button>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const dotsWrap = document.getElementById('dots');
+  const plateNow = document.getElementById('plateNow');
+  const plateTotal = document.getElementById('plateTotal');
+  const progressFill = document.getElementById('progressFill');
+  plateTotal.textContent = String(total).padStart(2,'0');
+
+  slides.forEach((s,i)=>{
+    const b = document.createElement('button');
+    if(i===0) b.classList.add('active');
+    b.addEventListener('click', ()=>goTo(i));
+    b.setAttribute('aria-label', 'Go to slide ' + (i+1) + ': ' + (s.dataset.title||''));
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  let current = 0;
+  function goTo(i){
+    if(i<0) i = total-1;
+    if(i>=total) i = 0;
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    plateNow.textContent = String(current+1).padStart(2,'0');
+    progressFill.style.width = (((current+1)/total)*100).toFixed(2) + '%';
+  }
+  document.getElementById('nextBtn').addEventListener('click', ()=>goTo(current+1));
+  document.getElementById('prevBtn').addEventListener('click', ()=>goTo(current-1));
+  const restartBtn = document.getElementById('restartBtn');
+  if(restartBtn) restartBtn.addEventListener('click', ()=>goTo(0));
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' '){ e.preventDefault(); goTo(current+1); }
+    else if(e.key==='ArrowLeft'){ e.preventDefault(); goTo(current-1); }
+  });
+
+  // basic swipe support
+  let touchX = null;
+  window.addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; });
+  window.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx) > 50){ dx < 0 ? goTo(current+1) : goTo(current-1); }
+    touchX = null;
+  });
+
+  // initialize progress rail
+  progressFill.style.width = ((1/total)*100).toFixed(2) + '%';
+})();
+</script>
+</body>
+</html>
